@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#define INF -1
+
 #define TASK1_TESTS_PATH "./pb1_tests/"
 #define TASK2_TESTS_PATH "./pb2_tests/"
 #define TASK3_TESTS_PATH "./pb3_tests/"
@@ -23,5 +25,7 @@
 using namespace std;
 
 int hasCycle(vector<vector<int>> graph);
+vector<int> shortestPath1(int source, vector<vector<pair<int, int>>> graph);
+vector<int> shortestPath2(int source, vector<vector<pair<int, int>>> graph);
 
 #endif //TEMA2_GRAPHS_UTIL_H

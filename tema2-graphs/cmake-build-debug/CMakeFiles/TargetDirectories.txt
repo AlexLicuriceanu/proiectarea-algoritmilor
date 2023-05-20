@@ -1,3 +1,0 @@
-C:/Users/Alex/Documents/GitHub/proiectarea-algoritmilor/tema2-graphs/cmake-build-debug/CMakeFiles/tema2_graphs.dir
-C:/Users/Alex/Documents/GitHub/proiectarea-algoritmilor/tema2-graphs/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Alex/Documents/GitHub/proiectarea-algoritmilor/tema2-graphs/cmake-build-debug/CMakeFiles/rebuild_cache.dir

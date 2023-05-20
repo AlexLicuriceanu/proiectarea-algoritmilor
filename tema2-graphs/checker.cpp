@@ -7,6 +7,12 @@
 
 using namespace std;
 
+void print_vector(const vector<int>& v) {
+    for (auto i : v) {
+        cout << i << " ";
+    }
+}
+
 int check_task1() {
 
     int taskScore = 0;
@@ -52,6 +58,9 @@ int check_task1() {
             // Add points.
             taskScore += individualTaskPoints;
         }
+        else {
+            cout << "Task 1." << task << ": Wrong output." << endl;
+        }
 
         // Close the files for the current test.
         fin.close();
@@ -83,31 +92,51 @@ int check_task2() {
         fin >> n >> m >> s;
 
         // Read the graph.
-        vector<vector<int>> graph(n+1);
+        vector<vector<pair<int, int>>> graph(n+1);
 
         for (int i = 0; i < m; i++) {
             int source, destination, cost;
             fin >> source >> destination >> cost;
-
-            // TODO
-            //graph[source].push_back(destination);
+            graph[source].emplace_back(destination, cost);
         }
 
         // Call the task's function.
-        // TODO
+        vector<int> result = shortestPath1(s, graph);
         // Output the result.
-        //fout << result;
+        for (unsigned int i = 1; i < result.size(); i++) {
+            fout << result[i] << " ";
+        }
 
         // Get the expected result.
-        int expected;
+        vector<int> expected;
         ifstream fin_ref(refFile);
-        fin_ref >> expected;
 
-        // Check if the computed result is the same as the expected result.
-        //if (result == expected) {
-            // Add points.
-        //    taskScore += individualTaskPoints;
-        //}
+        int x;
+        while (fin_ref >> x) {
+            expected.push_back(x);
+        }
+
+        // Check if the expected result is the same length as the computed result.
+        bool ok = true;
+        if (result.size() != expected.size()+1) {
+            ok = false;
+        }
+
+        // Check each element.
+        for (unsigned int i = 0; i < expected.size() && ok; i++) {
+            if (expected[i] != result[i+1]) {
+                ok = false;
+                break;
+            }
+        }
+
+        // Output error or add points if the result is correct.
+        if (!ok) {
+            cout << "Task 2." << task << ": Wrong output." << endl;
+        }
+        else {
+            taskScore += individualTaskPoints;
+        }
 
         // Close the files for the current test.
         fin.close();
@@ -119,14 +148,84 @@ int check_task2() {
 }
 
 int check_task3() {
+    int taskScore = 0;
+    int individualTaskPoints = TASK3_MAX_POINTS / TASK3_TESTS_NUMBER;
 
-    return 0;
+
+    for (int task = 1; task <= TASK3_TESTS_NUMBER; task++) {
+
+        // Set up file paths.
+        string inputFile = string(TASK3_TESTS_PATH) + "test" + to_string(task) + ".in";
+        string refFile = string(TASK3_TESTS_PATH) + "test" + to_string(task) + ".out";
+        string outputFile = string(TASK3_OUT_PATH) + "test" + to_string(task) + ".out";
+
+        // Set up file streams.
+        ifstream fin(inputFile);
+        ofstream fout(outputFile);
+
+        // Read number of nodes, number of edges, source node.
+        int n, m, s;
+        fin >> n >> m >> s;
+
+        // Read the graph.
+        vector<vector<pair<int, int>>> graph(n+1);
+
+        for (int i = 0; i < m; i++) {
+            int source, destination, cost;
+            fin >> source >> destination >> cost;
+            graph[source].emplace_back(destination, cost);
+        }
+
+        // Call the task's function.
+        vector<int> result = shortestPath2(s, graph);
+        // Output the result.
+        for (unsigned int i = 1; i < result.size(); i++) {
+            fout << result[i] << " ";
+        }
+
+        // Get the expected result.
+        vector<int> expected;
+        ifstream fin_ref(refFile);
+
+        int x;
+        while (fin_ref >> x) {
+            expected.push_back(x);
+        }
+
+        // Check if the expected result is the same length as the computed result.
+        bool ok = true;
+        if (result.size() != expected.size()+1) {
+            ok = false;
+        }
+
+        // Check each element.
+        for (unsigned int i = 0; i < expected.size() && ok; i++) {
+            if (expected[i] != result[i+1]) {
+                ok = false;
+                break;
+            }
+        }
+
+        // Output error or add points if correct.
+        if (!ok) {
+            cout << "Task 3." << task << ": Wrong output." << endl;
+        }
+        else {
+            taskScore += individualTaskPoints;
+        }
+
+        // Close the files for the current test.
+        fin.close();
+        fout.close();
+        fin_ref.close();
+    }
+
+    return taskScore;
 }
-
-
 
 int main(int argc, char **argv) {
 
+    // Program was run with invalid arguments.
     if (argc > 2) {
         cout << R"(Usage: "./checker" or "./checker <1 | 2 | 3>")" << endl;
         cout << "Where: 1 = task 1, 2 = task 2, 3 = task 3." << endl;
