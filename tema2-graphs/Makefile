@@ -1,25 +1,30 @@
-OBJS	= checker.o task1.o task2.o task3.o
-SOURCE	= checker.cpp task1.cpp task2.cpp task3.cpp
-HEADER	= util.h
-OUT	= checker
-CC	 = g++
-FLAGS	 = -g -c -Wall
-LFLAGS	 = 
+# Darius-Florentin Neatu <neatudarius@gmail.com>
+# Copyright 2018
 
-all: $(OBJS)
-	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
+# Exemplu de Makefile pentru tema
 
-checker.o: checker.cpp
-	$(CC) $(FLAGS) checker.cpp 
+# tag-uri obligatorii (nume + comportament identic)
+# build    => compileaza toata tema 
+#             (ATENTIE! E important - NU compilati in tag-urile de run. Sesizati?)
+# run-p$ID => ruleaza problema cu ID-ul specificat (1, 2, 3, 4)
+# clean    => sterge toate fisierele generate
 
-task1.o: task1.cpp
-	$(CC) $(FLAGS) task1.cpp 
+# restul este la alegerea studentului
+# TODO
 
-task2.o: task2.cpp
-	$(CC) $(FLAGS) task2.cpp
+# nume necesar (build)
+build:
+	# TODO 
+	g++ p1.cpp -o p1
+	g++ p2.cpp -o p2
+	g++ p3.cpp -o p3
 
-task3.o: task3.cpp
-	$(CC) $(FLAGS) task3.cpp
+run-p1:      # nume necesar
+	./p1
+run-p2:      # nume necesar
+	./p2
+run-p3:      # nume necesar 
+	./p3
 
-clean:
-	rm -f $(OBJS) $(OUT)
+clean:		 # nume necesar
+	rm p1 p2 p3
