@@ -1,7 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class Task {
@@ -30,15 +27,18 @@ private:
         // Cautati prima pozitie pe care se afla valoarea x
         // In cazul in care x nu apare in sir, returnati -1
 
-        int left = 0, right = n-1, mid, result = -1;
+        int left = 0, right = n-1, mid;
+        int result = -1;
+
         while (left <= right) {
             mid = (left + right) / 2;
+
             if (v[mid] >= x) {
-                right = mid-1;
-                result = mid;
+               right = mid - 1;
+               result = mid;
             }
             else {
-                left = mid+1;
+                left = mid + 1;
             }
         }
 
@@ -49,15 +49,18 @@ private:
         // Cautati ultima pozitie pe care se afla valoarea x
         // In cazul in care x nu apare in sir, returnati -1
 
-        int left = 0, right = n-1, mid, result = -1;
+        int left = 0, right = n-1, mid;
+        int result = -1;
+
         while (left <= right) {
             mid = (left + right) / 2;
+
             if (v[mid] <= x) {
-                left = mid+1;
+                left = mid + 1;
                 result = mid;
             }
             else {
-                right = mid-1;
+                right = mid - 1;
             }
         }
 
@@ -65,13 +68,13 @@ private:
     }
 
     int get_result() {
-        // Calculati numarul de aparitii ale lui x in vectorul v
-
         int first = find_first();
         int last = find_last();
+
         if (first == -1 || last == -1) {
             return 0;
         }
+
         return last - first + 1;
     }
 

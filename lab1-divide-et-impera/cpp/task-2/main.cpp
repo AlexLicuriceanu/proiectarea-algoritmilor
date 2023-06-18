@@ -1,10 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <cmath>
-
-#define PRECISION 0.001
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class Task {
@@ -26,10 +20,13 @@ private:
     double get_result() {
         // Calculati sqrt(n) cu o precizie de 0.001
         // Precizie de 10^-x = |rezultatul vostru - rezultatul corect| <= 10^-x
-
+        double eps = 0.001;
         double left = 0, right = n, mid;
 
-        if (n == 0) return 0;
+        if (n == 0) {
+            return 0;
+        }
+
         if (n < 1) {
             right = 1;
         }
@@ -37,7 +34,7 @@ private:
         while (left <= right) {
             mid = (left + right) / 2;
 
-            if (fabs(mid * mid - n) < PRECISION) {
+            if (fabs(mid * mid - n) < eps) {
                 return mid;
             }
 
